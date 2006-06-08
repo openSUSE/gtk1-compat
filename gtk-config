@@ -1,0 +1,69 @@
+#! /bin/bash
+
+#  Copyright (C) 2005 Stanislav Brabec <sbrabec@suse.cz>, SuSE CR
+#    
+# This program is free software; you can redistribute it and/or   
+# modify it under the terms of the GNU Lesser General Public License   
+# (LGPL) version 2.1  
+#   
+# See http://www.gnu.org/copyleft/lesser.html 
+#  
+# This program is distributed in the hope that it will be useful,        
+# but WITHOUT ANY WARRANTY; without even the implied warranty of        
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+
+declare -a args
+CMD='exec pkg-config gtk+-2.0 "${args[@]}"'
+LIBS_USED=false
+for arg in "$@" ; do
+    case "$arg" in
+	gtk | gdk-pixbuf )
+	    args[${#args[@]}]="$arg-2.0"
+	    ;;
+	glib | gmodule | gthread )
+	    unset args[${#args[@]}]
+	    ;;
+	--prefix )
+	    args[${#args[@]}]=--variable=prefix
+	    ;;
+	--exec-prefix )
+	    args[${#args[@]}]=--variable=exec_prefix
+	    ;;
+	--version )
+	    args[${#args[@]}]=--modversion
+	    CMD='pkg-config gtk+-2.0 "${args[@]}" | tail -n 1'
+	    ;;
+	--cflags )
+	    if test -z "$GTK1_COMPAT_DISABLE_C_SUPPORT" ; then
+		echo -n "-DGTK_ENABLE_BROKEN -I/opt/gnome/include/gtk1-compat "
+	    fi
+	    args[${#args[@]}]=$arg
+	    if test "$GTK1_COMPAT_THREAD_SUPPORT" ; then
+		args[${#args[@]}]="gthread-2.0"
+	    fi
+	    ;;
+	--libs )
+	    LIBS_USED=true
+	    args[${#args[@]}]=$arg
+	    if test "$GTK1_COMPAT_THREAD_SUPPORT" ; then
+		args[${#args[@]}]="gthread-2.0"
+	    fi
+	    ;;
+	* )
+	    args[${#args[@]}]=$arg
+	    ;;
+    esac
+done
+#echo -e >&2 "\n*** gtk1-compat simulation: ***"
+#echo >&2 "Command:     gtk-config $*"
+#eval echo >&2 "Replaced by: $CMD"
+
+if $LIBS_USED ; then
+    if test -z "$GTK1_COMPAT_DISABLE_C_SUPPORT" ; then
+	echo "$(eval $CMD) -lgtk1-compat"
+    else
+	eval $CMD
+    fi
+else
+    eval $CMD
+fi

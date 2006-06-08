@@ -1,0 +1,8 @@
+#ifndef __GTK1_COMPAT_GTKACCELGROUP_H__
+#define __GTK1_COMPAT_GTKACCELGROUP_H__
+#include_next <gtk/gtkaccelgroup.h>
+#define gtk_accel_group_attach gtk_accel_group_attach_2
+#define _gtk_accel_group_attach gtk_accel_group_attach_2
+#define gtk_accel_group_detach gtk_accel_group_detach_2
+#define _gtk_accel_group_detach gtk_accel_group_detach_2
+#endif

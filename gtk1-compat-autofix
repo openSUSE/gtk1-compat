@@ -1,0 +1,22 @@
+#! /bin/bash
+
+if ! test -f configure.ac -o -f configure.in -a "$1" != --force ; then
+    echo "This is probably not a top directory of a source project.
+Use $0 --force if you are sure."
+    exit 1
+fi
+
+echo "Trying to fix GTK1 source to work with GTK2 + gtk1-compat
+Warning: It may fail in particuar cases."
+
+find -type f -name '*.c' -o -name '*.cpp' | while read ; do
+    sed <$REPLY >$REPLY.gtk2 '
+s/\([->.a-zA-Z0-9_]*\)\(->font\)\([^a-zA-Z0-9_]\)/gdk_font_from_description(\1\2_desc)\3/g
+s/colorsel->main_vbox/colorsel->colorsel/g
+'
+    if diff -u $REPLY $REPLY.gtk2 ; then
+	rm $REPLY.gtk2
+    else
+	mv $REPLY.gtk2 $REPLY
+    fi
+done

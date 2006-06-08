@@ -1,0 +1,41 @@
+#! /bin/bash
+
+#  Copyright (C) 2005 Stanislav Brabec <sbrabec@suse.cz>, SuSE CR
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public License
+# (LGPL) version 2.1
+#
+# See http://www.gnu.org/copyleft/lesser.html
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+declare -a args
+CMD='exec pkg-config glib-2.0 "${args[@]}"'
+for arg in "$@" ; do
+    case "$arg" in
+	glib | gmodule | gthread )
+	    args[${#args[@]}]="$arg-2.0"
+	    ;;
+	--prefix )
+	    args[${#args[@]}]=--variable=prefix
+	    ;;
+	--exec-prefix )
+	    args[${#args[@]}]=--variable=exec_prefix
+	    ;;
+	--version )
+	    args[${#args[@]}]=--modversion
+	    CMD='pkg-config glib-2.0 "${args[@]}" | tail -n 1'
+	    ;;
+	* )
+	    args[${#args[@]}]=$arg
+	    ;;
+    esac
+done
+#echo -e >&2 "\n*** gtk1-compat simulation: ***"
+#echo >&2 "Command:     glib-config $*"
+#eval echo >&2 "Replaced by: $CMD"
+
+eval $CMD
