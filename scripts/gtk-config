@@ -35,7 +35,7 @@ for arg in "$@" ; do
 	    ;;
 	--cflags )
 	    if test -z "$GTK1_COMPAT_DISABLE_C_SUPPORT" ; then
-		echo -n "-DGTK_ENABLE_BROKEN -I/opt/gnome/include/gtk1-compat "
+		echo -n "`$PKG_CONFIG --cflags gtk1-compat` "
 	    fi
 	    args[${#args[@]}]=$arg
 	    if test "$GTK1_COMPAT_THREAD_SUPPORT" ; then

@@ -1,3 +1,5 @@
+/* edited version from gtk+-1.2.10 with removed functions defined elsewhere */
+
 /* GTK - The GIMP Toolkit
  * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
@@ -43,7 +45,6 @@ extern "C" {
 #define	gtk_container_border_width		gtk_container_set_border_width
 #define	gtk_notebook_current_page               gtk_notebook_get_current_page
 #define	gtk_packer_configure                    gtk_packer_set_child_packing
-#define	gtk_paned_gutter_size			gtk_paned_set_gutter_size
 #define	gtk_paned_handle_size			gtk_paned_set_handle_size
 #define	gtk_scale_value_width                   gtk_scale_get_value_width
 #define	gtk_window_position			gtk_window_set_position
@@ -52,8 +53,6 @@ extern "C" {
 
 /* strongly deprecated: */
 #define	gtk_ctree_set_reorderable(t,r)		gtk_clist_set_reorderable((GtkCList*) (t),(r))
-#define	gtk_style_apply_default_pixmap(s,gw,st,a,x,y,w,h) \
-    gtk_style_apply_default_background (s,gw,TRUE,st,a,x,y,w,h)
 
 #endif	/* GTK_DISABLE_COMPAT_H */
 

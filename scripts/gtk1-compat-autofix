@@ -9,9 +9,14 @@ fi
 echo "Trying to fix GTK1 source to work with GTK2 + gtk1-compat
 Warning: It may fail in particuar cases."
 
-find -type f -name '*.c' -o -name '*.cpp' | while read ; do
+find -type f -name '*.c' -o -name '*.cc' -o -name '*.cpp' | while read ; do
     sed <$REPLY >$REPLY.gtk2 '
 s/\([->.a-zA-Z0-9_]*\)\(->font\)\([^a-zA-Z0-9_]\)/gdk_font_from_description(\1\2_desc)\3/g
+s/([[:space:]]*([[:space:]]*GdkVisualPrivate[[:space:]]*\*[[:space:]]*)[[:space:]]*\([->a-zA-Z0-9_()]*\)[[:space:]]*)[[:space:]]*->xvisual\([^a-zA-Z0-9_]\)/GDK_VISUAL_XVISUAL(\1)\2/g
+s/([[:space:]]*([[:space:]]*GdkColormapPrivate[[:space:]]*\*[[:space:]]*)[[:space:]]*\([->a-zA-Z0-9_()]*\)[[:space:]]*)[[:space:]]*->xcolormap\([^a-zA-Z0-9_]\)/GDK_COLORMAP_XCOLORMAP(\1)\2/g
+s/([[:space:]]*([[:space:]]*GdkColormapPrivate[[:space:]]*\*[[:space:]]*)[[:space:]]*\([->a-zA-Z0-9_()]*\)[[:space:]]*)[[:space:]]*->xdisplay\([^a-zA-Z0-9_]\)/GDK_COLORMAP_XDISPLAY(\1)\2/g
+s/([[:space:]]*([[:space:]]*GdkPixmapPrivate[[:space:]]*\*[[:space:]]*)[[:space:]]*\([->a-zA-Z0-9_()]*\)[[:space:]]*)[[:space:]]*->xdisplay\([^a-zA-Z0-9_]\)/GDK_PIXMAP_XDISPLAY(\1)\2/g
+s/([[:space:]]*([[:space:]]*GdkPixmapPrivate[[:space:]]*\*[[:space:]]*)[[:space:]]*\([->a-zA-Z0-9_()]*\)[[:space:]]*)[[:space:]]*->xwindow\([^a-zA-Z0-9_]\)/GDK_WINDOW_XWINDOW(GDK_DRAWABLE(\1))\2/g
 s/colorsel->main_vbox/colorsel->colorsel/g
 '
     if diff -u $REPLY $REPLY.gtk2 ; then

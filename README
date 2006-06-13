@@ -1,0 +1,39 @@
+GTK1 Compatibility Package
+
+Compatibility Wrappers for Old Versions of GLib, GTK+, GDK-Pixbuf and
+libglade
+
+Wrapper headers, M4 macros, config scripts and library symlinks, which
+simulate presence of GLib1, GTK+1, GDK-Pixbuf1, libglade1 development
+packages, but tries to use GLib2, GTK+2 and libglade2.
+
+Using it, you can force linking of some old applications with new
+libraries without any effort.
+
+Package also provides gtk1-compat-autofix script, which does some
+source code modifications, which cannot be worked around by any other
+way.
+
+Package also provides gtk1-compat-autofix script, which does some
+source code modifications, which cannot be worked around by any other
+way, and a static library with some obsolete functions.
+
+
+Usage:
+
+Simply replace old devel packages by gtk1-compat in your system.
+Programs will be compiled with GTK+2, if possible.
+
+You may need to run gtk1-compat-autofix to modify sources to increase
+your chance to compile a package with gtk1-compat.
+
+Don't expect that you will be able to compile all projects!
+
+
+Environment:
+
+GTK1_COMPAT_DISABLE_C_SUPPORT: If set and non empty, disable C header
+emulation, provide only *-config scripts.
+
+GTK1_COMPAT_THREAD_SUPPORT: If set and non empty, try to link GTK+1
+applications with gthread library.

@@ -21,8 +21,8 @@
 -    GTK_CFLAGS=`$PKG_CONFIG $pkg_config_args --cflags`
 -    GTK_LIBS=`$PKG_CONFIG $pkg_config_args --libs`
 +    if test -z "$GTK1_COMPAT_DISABLE_C_SUPPORT" ; then
-+      GTK_CFLAGS="-DGTK_ENABLE_BROKEN -I/opt/gnome/include/gtk1-compat `$PKG_CONFIG $pkg_config_args --cflags`"
-+      GTK_LIBS="`$PKG_CONFIG $pkg_config_args --libs` -lgtk1-compat"
++      GTK_CFLAGS="`$PKG_CONFIG --cflags gtk1-compat` `$PKG_CONFIG $pkg_config_args --cflags`"
++      GTK_LIBS="`$PKG_CONFIG $pkg_config_args --libs` `$PKG_CONFIG --libs gtk1-compat`"
 +    else
 +      GTK_CFLAGS=`$PKG_CONFIG $pkg_config_args --cflags`
 +      GTK_LIBS=`$PKG_CONFIG $pkg_config_args --libs`

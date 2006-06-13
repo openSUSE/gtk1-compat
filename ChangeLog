@@ -1,0 +1,48 @@
+2006-06-13  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* gtk1-compat-autofix: Support for some Private structures.
+
+	* Converted sources to an automake based project.
+
+2006-06-08  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* *-config, *.m4: Added GTK1_COMPAT_DISABLE_C_SUPPORT to disable
+	C wrappers.
+
+2006-06-08  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* *-config: Added support for more arguments. Enabled support
+	for all deprecated gtk2 functions.
+
+	* *glade*, *xml*: Added support for libxml and libglade.
+
+	* *.m4: Force GTK2 objects in M4 files.
+
+	* *.h: Added some wrapper header files.
+
+	* *.c: Created a static library with removed or not exported
+	functions.
+
+	* scripts/gtk1-compat-autofix: Added.
+
+2005-09-29  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* *gdk-pixbuf*: Added support for gdk-pixbuf.
+
+2005-09-26  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* gtk.m4, glib.m4: Provide copy from gtk and glib.
+
+	* *-config: Better emulate --version.
+
+2005-06-20  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* *-config: Note the LGPL license (#91461).
+
+2005-04-12  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* gtk-config, glib-config: Added support for --version.
+
+2005-02-04  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* New SuSE package.

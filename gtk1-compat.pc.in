@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: GTK+1 Compatibility
+Description: GTK+1 Wrappers to Compile With GTK+2
+Requires: glib-2.0 gtk+-2.0 gtk+-x11-2.0 gdk-pixbuf-2.0 libglade-2.0 libxml-2.0
+Version: @VERSION@
+Libs: -L${libdir} -lgtk1-compat
+Cflags: -DGTK_ENABLE_BROKEN -I${includedir}/gtk1-compat
