@@ -1,3 +1,9 @@
+2006-07-27  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* scripts/gdk-pixbuf-config, scripts/gtk-config,
+	scripts/libglade-config: Fixed invalid use of $PKG_CONFIG
+	(reported by Ludwig Nussel).
+
 2006-06-13  Stanislav Brabec  <sbrabec@suse.cz>
 
 	* gtk1-compat-autofix: Support for some Private structures.

@@ -1,4 +1,4 @@
-AC_INIT([gtk1-compat],[0.8],[http://bugzilla.novell.com/])
+AC_INIT([gtk1-compat],[0.9],[http://bugzilla.novell.com/])
 AM_INIT_AUTOMAKE([dist-bzip2 no-dist-gzip])
 
 AC_PROG_CC
