@@ -12,9 +12,9 @@ m4data_DATA = \
 	$(m4_GENERATED_FILES)
 
 gtk.m4: gtk_m4.patch
-	for DIR in $$ACLOCAL_PATH $$(</usr/share/aclocal/dirlist) ; do \
-	if test $$DIR/gtk-2.0.m4 ; then \
-	cp -a $$DIR/gtk-2.0.m4 gtk.m4 ;\
+	for DIR in $$ACLOCAL_PATH $$(if test -f /usr/share/aclocal/dirlist ; then cat /usr/share/aclocal/dirlist ; fi) $$(if test -n "$(ACLOCAL)" ; then $(ACLOCAL) --print-ac-dir ; fi) /usr/share/aclocal ; do \
+	if test -f $$DIR/gtk-2.0.m4 ; then \
+	cp $$DIR/gtk-2.0.m4 gtk.m4 ;\
 	break ;\
 	fi ;\
 	done

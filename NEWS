@@ -1,0 +1,4 @@
+Changes in version 0.10:
+========================
+
+* Fixed aclocal directory search.

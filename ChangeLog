@@ -1,3 +1,9 @@
+2006-12-29  Stanislav Brabec  <sbrabec@suse.cz>
+
+	* m4macros/Makefile.am: Fixed searching of gtk-2.0.m4.
+
+	* configure.ac: Version 0.10.
+
 2006-07-27  Stanislav Brabec  <sbrabec@suse.cz>
 
 	* scripts/gdk-pixbuf-config, scripts/gtk-config,
@@ -51,4 +57,4 @@
 
 2005-02-04  Stanislav Brabec  <sbrabec@suse.cz>
 
-	* New SuSE package.
+	* Package created.
